@@ -1,0 +1,3 @@
+ALTER TABLE cooperatives RENAME COLUMN rc TO rlc;
+ALTER TABLE cooperatives ADD COLUMN IF NOT EXISTS secteur TEXT;
+ALTER TABLE cooperatives ADD COLUMN IF NOT EXISTS if_number TEXT;

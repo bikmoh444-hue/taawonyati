@@ -1,0 +1,26 @@
+# ============================================================
+# Supabase project configuration (partial)
+# ============================================================
+# NOTE: This repo had no supabase/config.toml before. This file
+# only adds the pieces needed to schedule the soft-delete purge
+# function (`purge-trash`). It was created from the default that
+# `supabase init` produces; adjust `project_id` to your project's
+# reference ID (from <project-ref>.supabase.co).
+
+project_id = "jwfawlknbhstvvexvsgx"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public", "storage"]
+extra_search_path = ["public", "extensions"]
+
+[functions.purge-trash]
+verify_jwt = false
+# Run once every day at 03:00 UTC. Uses cron syntax.
+schedule = "0 3 * * *"
+
+[functions.delete-cooperative]
+verify_jwt = false
+# Called on demand by the authenticated admin user from the app;
+# authorization is enforced inside the function itself.
