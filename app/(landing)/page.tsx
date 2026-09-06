@@ -5,12 +5,15 @@ import { DesignerSection } from "@/components/landing/designer-section";
 import { FeaturesSection } from "@/components/landing/features-section";
 import { LandingHero } from "@/components/landing/landing-hero";
 import { PricingSection } from "@/components/landing/pricing-section";
+import { getLocale, getT } from "@/lib/i18n/server";
 
-export const metadata: Metadata = {
-  title: "Taawoniati - Gestion des cooperatives",
-  description:
-    "Application web et mobile pour simplifier la gestion des cooperatives.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = getT(getLocale());
+  return {
+    title: t("landing.metaTitle"),
+    description: t("landing.metaDescription"),
+  };
+}
 
 export default function LandingHomePage() {
   return (

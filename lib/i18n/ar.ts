@@ -67,6 +67,7 @@ export const ar = {
     to: "إلى",
     invoice: "فاتورة",
     factory: "المصدر",
+    menu: "القائمة",
   },
   auth: {
     loginTitle: "تسجيل الدخول إلى Taawoniati",
@@ -265,8 +266,8 @@ export const ar = {
     draftBadge: "مسودة",
     invoice: "فاتورة",
     devis: "عرض سعر",
-    deliveryNote: "رائع",
-    purchaseOrder: "رائع",
+    deliveryNote: "فاتورة التوصيل",
+    purchaseOrder: "طلب شراء",
     facture: "فاتورة",
     devisLabel: "عرض سعر",
     bdlLabel: "فاتورة التوصيل",
@@ -429,6 +430,13 @@ export const ar = {
     heroBadge: "المنصة التعاونية SaaS رقم 1",
     heroTrust1: "متوافق مع القانون 112-12",
     heroTrust2: "بيانات آمنة 100%",
+    heroTitleFallback: "تدبير تعاونيتك،",
+    heroHighlightFallback: "مُبسّط",
+    heroSubtitleFallback:
+      "مركز الوثائق والمالية والزبناء والأنشطة في منصة واحدة للويب والهاتف، مصممة للتعاونيات المغربية.",
+    heroVisualAlt: "لوحة قيادة Sinshin",
+    heroScreenshotAddHint: "أضف لقطة شاشة من لوحة الإدارة",
+    heroScreenshotHint: "لوحة القيادة للويب / الحاسوب",
     accessTitle: "طريقتان للوصول",
     accessSubtitle:
       "استخدم المنصة من متصفحك أو خذها معك عبر تطبيق الهاتف.",
@@ -445,6 +453,16 @@ export const ar = {
     accessMobileCaption: "لقطة هاتف",
     accessWebButton: "افتح الموقع",
     accessMobileButton: "افتح التطبيق",
+    screenshotAddWeb: "أضف لقطة ويب",
+    screenshotAddMobile: "أضف لقطة هاتف",
+    screenshotAddWebHint: "أضف لقطة ويب من لوحة الإدارة",
+    screenshotCatLabel: "الفئة",
+    screenshotCatSuffix: "في لقطات الشاشة",
+    screenshotGoToSlide: "الانتقال إلى الشريحة",
+    mockupMobileAlt: "لقطة هاتف",
+    mockupWebAlt: "لقطة ويب",
+    mockupMobileLabel: "لقطة الهاتف",
+    mockupWebLabel: "لقطة الويب",
     featuresTitle: "كل ما تحتاجه تعاونيتك",
     featuresSubtitle:
       "أدوات بسيطة وفعالة لتدبير الوثائق والمالية والزبناء والأنشطة.",
@@ -484,6 +502,7 @@ export const ar = {
     designerRole: "[دور — مثال: مصمم ومطور الموقع]",
     designerBio:
       "شغوف بإنشاء تجارب ويب أنيقة وعملية، أصمم مواقع تعكس هويتكم.",
+    designerRoleFallback: "مصمم",
     designerWhatsApp: "واتساب",
     designerEmail: "البريد",
     designerPortfolio: "المعرض / LinkedIn",
@@ -613,6 +632,13 @@ export const ar = {
     footerLegal: "الإشعارات القانونية",
     footerPrivacy: "سياسة الخصوصية",
     footerCgv: "شروط الاستخدام",
+    metaTitle: "Taawoniati - تدبير التعاونيات",
+    metaDescription: "تطبيق للويب والهاتف لتبسيط تدبير التعاونيات.",
+    metaFeaturesTitle: "المميزات والأسعار — Taawoniati",
+    metaDescriptionFeatures:
+      "كل ما تحتاجه تعاونيتك: الوثائق والمالية والزبناء والأنشطة. اختر باقتك.",
+    metaLayoutDescription:
+      "تقديم عام لمنصة Taawoniati، تطبيق للويب والهاتف لتدبير التعاونيات.",
   },
   adminSite: {
     title: "الموقع التعريفي",

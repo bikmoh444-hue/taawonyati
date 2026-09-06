@@ -93,7 +93,7 @@ export function LandingHeader({
             type="button"
             onClick={() => setOpen((v) => !v)}
             className="grid h-9 w-9 place-items-center rounded-lg text-[#0D9488] md:hidden"
-            aria-label="Menu"
+            aria-label={t("common.menu")}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>

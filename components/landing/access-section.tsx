@@ -26,6 +26,7 @@ function ScreenshotCarousel({
   fallbackLabel: string;
   variant?: "desktop" | "mobile";
 }) {
+  const { t } = useI18n();
   const Mockup = variant === "desktop" ? DesktopMockup : PhoneMockup;
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -89,10 +90,15 @@ function ScreenshotCarousel({
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-500">
-                    Ajouter une capture web depuis l&apos;admin
+                    {t(
+                      variant === "desktop"
+                        ? "landing.screenshotAddWebHint"
+                        : "landing.screenshotAddMobile"
+                    )}
                   </p>
                   <p className="mt-1 text-[11px] text-slate-400">
-                    Catégorie « Version Web » dans les screenshots
+                    {t("landing.screenshotCatLabel")} « {categoryLabel} »{" "}
+                    {t("landing.screenshotCatSuffix")}
                   </p>
                 </div>
               </div>
@@ -115,7 +121,8 @@ function ScreenshotCarousel({
                   {fallbackLabel}
                 </p>
                 <p className="text-[9px] text-slate-400">
-                  Catégorie « {categoryLabel} » dans les screenshots
+                  {t("landing.screenshotCatLabel")} « {categoryLabel} »{" "}
+                  {t("landing.screenshotCatSuffix")}
                 </p>
               </div>
             )}
@@ -170,7 +177,7 @@ function ScreenshotCarousel({
                   ? "bg-[#0D9488] w-4"
                   : "bg-slate-300 hover:bg-slate-400"
               }`}
-              aria-label={`Go to slide ${idx + 1}`}
+              aria-label={`${t("landing.screenshotGoToSlide")} ${idx + 1}`}
             />
           ))}
         </div>
@@ -233,8 +240,8 @@ export function AccessSection() {
               </h4>
               <ScreenshotCarousel
                 screenshots={webScreenshots}
-                categoryLabel="Version Web"
-                fallbackLabel="Ajouter une capture web"
+                categoryLabel={t("landing.accessWebTitle")}
+                fallbackLabel={t("landing.screenshotAddWeb")}
                 variant="desktop"
               />
             </div>
@@ -294,8 +301,8 @@ export function AccessSection() {
           {/* Phone carousel */}
           <ScreenshotCarousel
             screenshots={appScreenshots}
-            categoryLabel="Application Mobile"
-            fallbackLabel="Ajouter une capture mobile"
+            categoryLabel={t("landing.accessMobileTitle")}
+            fallbackLabel={t("landing.screenshotAddMobile")}
           />
         </div>
       </div>

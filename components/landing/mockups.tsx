@@ -1,5 +1,8 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Image from "next/image";
+import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 // ---------------------------------------------------------------------------
@@ -25,6 +28,7 @@ export function PhoneMockup({
   className?: string;
   fallback?: ReactNode;
 }) {
+  const { t } = useI18n();
   return (
     <div
       className={cn(
@@ -40,14 +44,16 @@ export function PhoneMockup({
         {src ? (
           <Image
             src={src}
-            alt={alt ?? "Aperçu mobile"}
+            alt={alt ?? t("landing.mockupMobileAlt")}
             fill
             sizes="(max-width: 640px) 200px, (max-width: 768px) 250px, 280px"
             className="object-contain object-center"
             unoptimized
           />
         ) : (
-          fallback ?? <ScreenPlaceholder label="Capture mobile" />
+          fallback ?? (
+            <ScreenPlaceholder label={t("landing.mockupMobileLabel")} />
+          )
         )}
       </div>
     </div>
@@ -67,6 +73,7 @@ export function DesktopMockup({
   fallback?: ReactNode;
   urlText?: string;
 }) {
+  const { t } = useI18n();
   return (
     <div
       className={cn(
@@ -89,14 +96,14 @@ export function DesktopMockup({
         {src ? (
           <Image
             src={src}
-            alt={alt ?? "Aperçu web"}
+            alt={alt ?? t("landing.mockupWebAlt")}
             fill
             sizes="(max-width: 800px) 100vw, 800px"
             className="object-contain object-center"
             unoptimized
           />
         ) : (
-          fallback ?? <ScreenPlaceholder label="Capture web" />
+          fallback ?? <ScreenPlaceholder label={t("landing.mockupWebLabel")} />
         )}
       </div>
     </div>

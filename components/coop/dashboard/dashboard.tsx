@@ -96,11 +96,11 @@ function buildTrend(
   });
 }
 
-function docsTypeLabel(t: string): string {
-  if (t === "FAC") return "FAC";
-  if (t === "DEV") return "DEV";
-  if (t === "BDL") return "BDL";
-  return "DOC";
+function docsTypeLabelKey(type: string): string {
+  if (type === "FAC") return "docs.invoice";
+  if (type === "DEV") return "docs.devis";
+  if (type === "BDL") return "docs.deliveryNote";
+  return "docs.purchaseOrder";
 }
 
 export function Dashboard({
@@ -292,7 +292,7 @@ export function Dashboard({
                   </div>
                   <div className="text-end">
                     <Badge variant="outline" className="text-primary">
-                      {docsTypeLabel(d.type)}
+                      {t(docsTypeLabelKey(d.type))}
                     </Badge>
                     <p className="mt-0.5 text-sm font-bold text-navy" dir="ltr">
                       {fmtMoney(d.total, locale)}

@@ -6,6 +6,7 @@
 
 import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
+import { getLocale } from "@/lib/i18n/server";
 import { MOCKUP_SLOTS } from "@/lib/types";
 import type {
   DesignerCard,
@@ -59,8 +60,19 @@ function settingsByKey(rows: SiteSetting[]): Record<string, string | null> {
   return map;
 }
 
+// Returns the Arabic value when the locale is Arabic and the value is
+// non-empty ; otherwise falls back to the French value.
+function pickByLocale<T>(isArabic: boolean, fr: T, ar: T | null | undefined): T {
+  if (!isArabic) return fr;
+  if (ar == null) return fr;
+  if (Array.isArray(ar) && (ar as unknown[]).length === 0) return fr;
+  if (typeof ar === "string" && (ar as string).trim() === "") return fr;
+  return ar;
+}
+
 export async function getLandingContent(): Promise<LandingContent> {
   void cookies();
+  const isArabic = getLocale() === "ar";
   const supabase = createClient();
 
   const [mediaRes, heroRes, featuresRes, plansRes, socialRes, settingsRes, screenshotsRes, designerRes, ownerRes] =
@@ -127,9 +139,9 @@ export async function getLandingContent(): Promise<LandingContent> {
 
   const hero = heroRes.data
     ? {
-        title: heroRes.data.title,
-        highlighted_word: heroRes.data.highlighted_word,
-        subtitle: heroRes.data.subtitle,
+        title: pickByLocale(isArabic, heroRes.data.title, heroRes.data.title_ar),
+        highlighted_word: pickByLocale(isArabic, heroRes.data.highlighted_word, heroRes.data.highlighted_word_ar),
+        subtitle: pickByLocale(isArabic, heroRes.data.subtitle, heroRes.data.subtitle_ar),
       }
     : null;
 
@@ -138,13 +150,43 @@ export async function getLandingContent(): Promise<LandingContent> {
     mockups[slot] = media[slot] ?? null;
   }
 
+  const pickPlan = (plan: PricingPlan | null): PricingPlan | null => {
+    if (!plan) return null;
+    return {
+      ...plan,
+      badge: pickByLocale(isArabic, plan.badge, plan.badge_ar) ?? plan.badge,
+      features: pickByLocale(isArabic, plan.features, plan.features_ar) ?? plan.features,
+      whatsapp_message: pickByLocale(isArabic, plan.whatsapp_message, plan.whatsapp_message_ar) ?? plan.whatsapp_message,
+    };
+  };
+
+  const designerCard: DesignerCard | null = designerRes.data
+    ? {
+        ...designerRes.data,
+        role: pickByLocale(isArabic, designerRes.data.role, designerRes.data.role_ar),
+        bio: pickByLocale(isArabic, designerRes.data.bio, designerRes.data.bio_ar),
+      }
+    : null;
+
+  const ownerCompanyCard: OwnerCompanyCard | null = ownerRes.data
+    ? {
+        ...ownerRes.data,
+        subtitle: pickByLocale(isArabic, ownerRes.data.subtitle, ownerRes.data.subtitle_ar),
+        description: pickByLocale(isArabic, ownerRes.data.description, ownerRes.data.description_ar),
+      }
+    : null;
+
   return {
     hero,
     galleryScreenshots: screenshotsRes.data ?? [],
     mockups,
-    features: featuresRes.data ?? [],
-    monthlyPlan: plans.find((p) => p.plan_type === "monthly") ?? null,
-    annualPlan: plans.find((p) => p.plan_type === "annual") ?? null,
+    features: (featuresRes.data ?? []).map((f) => ({
+      ...f,
+      title: pickByLocale(isArabic, f.title, f.title_ar),
+      description: pickByLocale(isArabic, f.description, f.description_ar),
+    })),
+    monthlyPlan: pickPlan(plans.find((p) => p.plan_type === "monthly") ?? null),
+    annualPlan: pickPlan(plans.find((p) => p.plan_type === "annual") ?? null),
     social,
     settings: {
       whatsappNumber: settingsMap["whatsapp_number"],
@@ -153,7 +195,7 @@ export async function getLandingContent(): Promise<LandingContent> {
       gmailAddress: settingsMap["gmail_address"] ?? settingsMap["email"],
       logoUrl: settingsMap["logo_url"],
     },
-    designerCard: designerRes.data ?? null,
-    ownerCompanyCard: ownerRes.data ?? null,
+    designerCard,
+    ownerCompanyCard,
   };
 }

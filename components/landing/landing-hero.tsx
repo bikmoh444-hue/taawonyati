@@ -15,11 +15,10 @@ export function LandingHero() {
   const { mockups, hero } = useLanding();
   const { t } = useI18n();
 
-  const heroTitle = hero?.title ?? "La gestion de votre coopérative,";
-  const heroHighlight = hero?.highlighted_word ?? "simplifiée";
-  const heroSubtitle =
-    hero?.subtitle ??
-    "Centralisez documents, finances, clients et activités sur une seule plateforme web et mobile, pensée pour les coopératives marocaines.";
+  const heroTitle = hero?.title ?? t("landing.heroTitleFallback");
+  const heroHighlight =
+    hero?.highlighted_word ?? t("landing.heroHighlightFallback");
+  const heroSubtitle = hero?.subtitle ?? t("landing.heroSubtitleFallback");
 
   return (
     <section className="relative overflow-hidden bg-white">
@@ -81,11 +80,12 @@ function HeroVisual({
 }: {
   src: string | null;
 }) {
+  const { t } = useI18n();
   return (
     <div className="relative mx-auto w-full max-w-[400px] sm:max-w-[560px] md:max-w-[640px]">
       <DesktopMockup
         src={src}
-        alt="Dashboard Sinshin"
+        alt={t("landing.heroVisualAlt")}
         urlText="https://sinshin.com/dashboard"
         fallback={
           <div className="grid h-full w-full place-items-center bg-[#F4F7F6]">
@@ -106,10 +106,10 @@ function HeroVisual({
               </div>
               <div>
                 <p className="text-xs font-bold text-slate-500">
-                  Ajouter une capture depuis l&apos;admin
+                  {t("landing.heroScreenshotAddHint")}
                 </p>
                 <p className="mt-1 text-[11px] text-slate-400">
-                  Tableau de bord web / desktop
+                  {t("landing.heroScreenshotHint")}
                 </p>
               </div>
             </div>

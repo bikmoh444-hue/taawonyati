@@ -3,14 +3,15 @@ import type { Metadata } from "next";
 import { getLandingContent } from "@/lib/landing";
 import { createClient } from "@/lib/supabase/server";
 import { LandingShell } from "@/components/landing/landing-shell";
+import { getLocale, getT } from "@/lib/i18n/server";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const t = getT(getLocale());
   return {
-    title: "Taawoniati - Gestion des cooperatives",
-    description:
-      "Presentation publique de Taawoniati, plateforme web et mobile pour la gestion des cooperatives.",
+    title: t("landing.metaTitle"),
+    description: t("landing.metaLayoutDescription"),
   };
 }
 

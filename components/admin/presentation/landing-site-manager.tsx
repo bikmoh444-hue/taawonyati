@@ -116,6 +116,11 @@ export function LandingSiteManager({
     hero?.highlighted_word ?? "simplifiée"
   );
   const [heroSubtitle, setHeroSubtitle] = useState(hero?.subtitle ?? "");
+  const [heroTitleAr, setHeroTitleAr] = useState(hero?.title_ar ?? "");
+  const [heroHighlightAr, setHeroHighlightAr] = useState(
+    hero?.highlighted_word_ar ?? ""
+  );
+  const [heroSubtitleAr, setHeroSubtitleAr] = useState(hero?.subtitle_ar ?? "");
   const [heroId, setHeroId] = useState<string | null>(hero?.id ?? null);
   const [heroShot, setHeroShot] = useState<string | null>(
     findMedia(media, "hero_dashboard")
@@ -123,13 +128,22 @@ export function LandingSiteManager({
 
   /* ---- Features state ---- */
   const [featureRows, setFeatureRows] = useState<
-    { id: string | null; icon: string; title: string; description: string }[]
+    {
+      id: string | null;
+      icon: string;
+      title: string;
+      description: string;
+      titleAr: string;
+      descriptionAr: string;
+    }[]
   >(
     initialFeatures.map((f) => ({
       id: f.id,
       icon: f.icon,
       title: f.title,
       description: f.description,
+      titleAr: f.title_ar ?? "",
+      descriptionAr: f.description_ar ?? "",
     }))
   );
 
@@ -139,6 +153,9 @@ export function LandingSiteManager({
     badge: monthlyPlan?.badge ?? "",
     featuresText: (monthlyPlan?.features ?? []).join("\n"),
     whatsapp_message: monthlyPlan?.whatsapp_message ?? "",
+    badgeAr: monthlyPlan?.badge_ar ?? "",
+    featuresTextAr: (monthlyPlan?.features_ar ?? []).join("\n"),
+    whatsapp_message_ar: monthlyPlan?.whatsapp_message_ar ?? "",
     is_featured: monthlyPlan?.is_featured ?? false,
   });
   const [annual, setAnnual] = useState({
@@ -146,6 +163,9 @@ export function LandingSiteManager({
     badge: annualPlan?.badge ?? "",
     featuresText: (annualPlan?.features ?? []).join("\n"),
     whatsapp_message: annualPlan?.whatsapp_message ?? "",
+    badgeAr: annualPlan?.badge_ar ?? "",
+    featuresTextAr: (annualPlan?.features_ar ?? []).join("\n"),
+    whatsapp_message_ar: annualPlan?.whatsapp_message_ar ?? "",
     is_featured: annualPlan?.is_featured ?? true,
   });
 
@@ -181,6 +201,8 @@ export function LandingSiteManager({
     name: initialDesignerCard?.name ?? "",
     role: initialDesignerCard?.role ?? "",
     bio: initialDesignerCard?.bio ?? "",
+    roleAr: initialDesignerCard?.role_ar ?? "",
+    bioAr: initialDesignerCard?.bio_ar ?? "",
     avatar_url: initialDesignerCard?.avatar_url ?? null,
     whatsapp_link: initialDesignerCard?.whatsapp_link ?? "",
     email: initialDesignerCard?.email ?? "",
@@ -198,6 +220,8 @@ export function LandingSiteManager({
     name: initialOwnerCompanyCard?.name ?? "",
     subtitle: initialOwnerCompanyCard?.subtitle ?? "",
     description: initialOwnerCompanyCard?.description ?? "",
+    subtitleAr: initialOwnerCompanyCard?.subtitle_ar ?? "",
+    descriptionAr: initialOwnerCompanyCard?.description_ar ?? "",
     whatsapp: initialOwnerCompanyCard?.whatsapp ?? "",
     email: initialOwnerCompanyCard?.email ?? "",
     website_url: initialOwnerCompanyCard?.website_url ?? "",
@@ -243,6 +267,9 @@ export function LandingSiteManager({
 setHeroTitle(heroData?.title ?? "");
       setHeroHighlight(heroData?.highlighted_word ?? "simplifiée");
       setHeroSubtitle(heroData?.subtitle ?? "");
+      setHeroTitleAr(heroData?.title_ar ?? "");
+      setHeroHighlightAr(heroData?.highlighted_word_ar ?? "");
+      setHeroSubtitleAr(heroData?.subtitle_ar ?? "");
       setHeroId(heroData?.id ?? null);
       setHeroShot(findMedia(mediaList, "hero_dashboard"));
 
@@ -252,6 +279,8 @@ setHeroTitle(heroData?.title ?? "");
         icon: f.icon,
         title: f.title,
         description: f.description,
+        titleAr: f.title_ar ?? "",
+        descriptionAr: f.description_ar ?? "",
       }))
     );
 
@@ -262,6 +291,9 @@ setHeroTitle(heroData?.title ?? "");
       badge: monthlyP?.badge ?? "",
       featuresText: (monthlyP?.features ?? []).join("\n"),
       whatsapp_message: monthlyP?.whatsapp_message ?? "",
+      badgeAr: monthlyP?.badge_ar ?? "",
+      featuresTextAr: (monthlyP?.features_ar ?? []).join("\n"),
+      whatsapp_message_ar: monthlyP?.whatsapp_message_ar ?? "",
       is_featured: monthlyP?.is_featured ?? false,
     });
     setAnnual({
@@ -269,6 +301,9 @@ setHeroTitle(heroData?.title ?? "");
       badge: annualP?.badge ?? "",
       featuresText: (annualP?.features ?? []).join("\n"),
       whatsapp_message: annualP?.whatsapp_message ?? "",
+      badgeAr: annualP?.badge_ar ?? "",
+      featuresTextAr: (annualP?.features_ar ?? []).join("\n"),
+      whatsapp_message_ar: annualP?.whatsapp_message_ar ?? "",
       is_featured: annualP?.is_featured ?? true,
     });
 
@@ -300,6 +335,8 @@ setHeroTitle(heroData?.title ?? "");
         name: dc.name ?? "",
         role: dc.role ?? "",
         bio: dc.bio ?? "",
+        roleAr: dc.role_ar ?? "",
+        bioAr: dc.bio_ar ?? "",
         avatar_url: dc.avatar_url ?? null,
         whatsapp_link: dc.whatsapp_link ?? "",
         email: dc.email ?? "",
@@ -323,6 +360,8 @@ setHeroTitle(heroData?.title ?? "");
         name: oc.name ?? "",
         subtitle: oc.subtitle ?? "",
         description: oc.description ?? "",
+        subtitleAr: oc.subtitle_ar ?? "",
+        descriptionAr: oc.description_ar ?? "",
         whatsapp: oc.whatsapp ?? "",
         email: oc.email ?? "",
         website_url: oc.website_url ?? "",
@@ -341,6 +380,9 @@ setHeroTitle(heroData?.title ?? "");
         title: heroTitle.trim(),
         highlighted_word: heroHighlight.trim(),
         subtitle: heroSubtitle.trim(),
+        title_ar: heroTitleAr.trim() || null,
+        highlighted_word_ar: heroHighlightAr.trim() || null,
+        subtitle_ar: heroSubtitleAr.trim() || null,
       };
       if (heroId) {
         const { error } = await supabase
@@ -406,6 +448,8 @@ setHeroTitle(heroData?.title ?? "");
           icon: f.icon,
           title: f.title.trim(),
           description: f.description.trim(),
+          title_ar: f.titleAr.trim() || null,
+          description_ar: f.descriptionAr.trim() || null,
           sort_order: i,
         }))
       );
@@ -440,6 +484,12 @@ setHeroTitle(heroData?.title ?? "");
               .map((s) => s.trim())
               .filter(Boolean),
             whatsapp_message: state.whatsapp_message.trim() || null,
+            badge_ar: state.badgeAr.trim() || null,
+            features_ar: state.featuresTextAr
+              .split("\n")
+              .map((s) => s.trim())
+              .filter(Boolean),
+            whatsapp_message_ar: state.whatsapp_message_ar.trim() || null,
             is_featured: state.is_featured,
           },
           { onConflict: "plan_type" }
@@ -579,6 +629,8 @@ setHeroTitle(heroData?.title ?? "");
         name: designer.name.trim(),
         role: designer.role.trim(),
         bio: designer.bio.trim(),
+        role_ar: designer.roleAr.trim() || null,
+        bio_ar: designer.bioAr.trim() || null,
         avatar_url: designer.avatar_url || null,
         whatsapp_link: designer.whatsapp_link.trim() || null,
         email: designer.email.trim() || null,
@@ -624,6 +676,8 @@ setHeroTitle(heroData?.title ?? "");
         name: societe.name.trim(),
         subtitle: societe.subtitle.trim(),
         description: societe.description.trim(),
+        subtitle_ar: societe.subtitleAr.trim() || null,
+        description_ar: societe.descriptionAr.trim() || null,
         whatsapp: societe.whatsapp.trim() || null,
         email: societe.email.trim() || null,
         website_url: societe.website_url.trim() || null,
@@ -655,7 +709,7 @@ setHeroTitle(heroData?.title ?? "");
   function addFeature() {
     setFeatureRows((prev) => [
       ...prev,
-      { id: null, icon: "file-text", title: "", description: "" },
+      { id: null, icon: "file-text", title: "", description: "", titleAr: "", descriptionAr: "" },
     ]);
   }
 
@@ -686,7 +740,7 @@ setHeroTitle(heroData?.title ?? "");
 
   function updateFeature(
     idx: number,
-    field: "icon" | "title" | "description",
+    field: "icon" | "title" | "description" | "titleAr" | "descriptionAr",
     value: string
   ) {
     setFeatureRows((prev) =>
@@ -804,28 +858,69 @@ setHeroTitle(heroData?.title ?? "");
                 </div>
               </div>
             </div>
-            <FormField label={t("adminSite.heroTitle")}>
-              <Input
-                value={heroTitle}
-                onChange={(e) => setHeroTitle(e.target.value)}
-              />
-            </FormField>
-            <FormField
-              label={t("adminSite.heroHighlight")}
-              hint={t("adminSite.heroTitleHelp")}
-            >
-              <Input
-                value={heroHighlight}
-                onChange={(e) => setHeroHighlight(e.target.value)}
-              />
-            </FormField>
-            <FormField label={t("adminSite.heroSubtitle")}>
-              <Textarea
-                value={heroSubtitle}
-                onChange={(e) => setHeroSubtitle(e.target.value)}
-                rows={3}
-              />
-            </FormField>
+            <Tabs defaultValue="fr">
+              <TabsList>
+                <TabsTrigger value="fr">Français</TabsTrigger>
+                <TabsTrigger value="ar">العربية</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="fr">
+                <div className="space-y-4">
+                  <FormField label={t("adminSite.heroTitle")}>
+                    <Input
+                      value={heroTitle}
+                      onChange={(e) => setHeroTitle(e.target.value)}
+                    />
+                  </FormField>
+                  <FormField
+                    label={t("adminSite.heroHighlight")}
+                    hint={t("adminSite.heroTitleHelp")}
+                  >
+                    <Input
+                      value={heroHighlight}
+                      onChange={(e) => setHeroHighlight(e.target.value)}
+                    />
+                  </FormField>
+                  <FormField label={t("adminSite.heroSubtitle")}>
+                    <Textarea
+                      value={heroSubtitle}
+                      onChange={(e) => setHeroSubtitle(e.target.value)}
+                      rows={3}
+                    />
+                  </FormField>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="ar">
+                <div className="space-y-4">
+                  <FormField label="العنوان">
+                    <Input
+                      dir="rtl"
+                      value={heroTitleAr}
+                      onChange={(e) => setHeroTitleAr(e.target.value)}
+                    />
+                  </FormField>
+                  <FormField
+                    label="الكلمة المميّزة"
+                    hint={t("adminSite.heroTitleHelp")}
+                  >
+                    <Input
+                      dir="rtl"
+                      value={heroHighlightAr}
+                      onChange={(e) => setHeroHighlightAr(e.target.value)}
+                    />
+                  </FormField>
+                  <FormField label="الوصف الفرعي">
+                    <Textarea
+                      dir="rtl"
+                      value={heroSubtitleAr}
+                      onChange={(e) => setHeroSubtitleAr(e.target.value)}
+                      rows={3}
+                    />
+                  </FormField>
+                </div>
+              </TabsContent>
+            </Tabs>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <p className="mb-2 text-sm font-semibold">
@@ -899,28 +994,65 @@ setHeroTitle(heroData?.title ?? "");
                   </Select>
                 </div>
 
-                <div className="w-full flex-1">
-                  <p className="mb-1 text-xs font-semibold text-muted-foreground">
-                    {t("adminSite.featureTitle")}
-                  </p>
-                  <Input
-                    value={f.title}
-                    onChange={(e) =>
-                      updateFeature(idx, "title", e.target.value)
-                    }
-                  />
-                </div>
-                <div className="w-full flex-1">
-                  <p className="mb-1 text-xs font-semibold text-muted-foreground">
-                    {t("adminSite.featureDescription")}
-                  </p>
-                  <Textarea
-                    value={f.description}
-                    onChange={(e) =>
-                      updateFeature(idx, "description", e.target.value)
-                    }
-                    rows={2}
-                  />
+                <div className="grid w-full flex-1 gap-3 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <p className="text-xs font-bold text-muted-foreground">
+                      Français
+                    </p>
+                    <div>
+                      <p className="mb-1 text-xs font-semibold text-muted-foreground">
+                        {t("adminSite.featureTitle")}
+                      </p>
+                      <Input
+                        value={f.title}
+                        onChange={(e) =>
+                          updateFeature(idx, "title", e.target.value)
+                        }
+                      />
+                    </div>
+                    <div>
+                      <p className="mb-1 text-xs font-semibold text-muted-foreground">
+                        {t("adminSite.featureDescription")}
+                      </p>
+                      <Textarea
+                        value={f.description}
+                        onChange={(e) =>
+                          updateFeature(idx, "description", e.target.value)
+                        }
+                        rows={2}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-xs font-bold text-muted-foreground">
+                      العربية
+                    </p>
+                    <div>
+                      <p className="mb-1 text-xs font-semibold text-muted-foreground">
+                        العنوان
+                      </p>
+                      <Input
+                        dir="rtl"
+                        value={f.titleAr}
+                        onChange={(e) =>
+                          updateFeature(idx, "titleAr", e.target.value)
+                        }
+                      />
+                    </div>
+                    <div>
+                      <p className="mb-1 text-xs font-semibold text-muted-foreground">
+                        الوصف
+                      </p>
+                      <Textarea
+                        dir="rtl"
+                        value={f.descriptionAr}
+                        onChange={(e) =>
+                          updateFeature(idx, "descriptionAr", e.target.value)
+                        }
+                        rows={2}
+                      />
+                    </div>
+                  </div>
                 </div>
                 <button
                   type="button"
@@ -1256,26 +1388,64 @@ setHeroTitle(heroData?.title ?? "");
                 />
               </FormField>
 
-              <FormField label="Rôle">
-                <Input
-                  value={designer.role}
-                  onChange={(e) =>
-                    setDesigner((p) => ({ ...p, role: e.target.value }))
-                  }
-                  placeholder="Designer & Développeur du site"
-                />
-              </FormField>
+              <Tabs defaultValue="fr">
+                <TabsList>
+                  <TabsTrigger value="fr">Français</TabsTrigger>
+                  <TabsTrigger value="ar">العربية</TabsTrigger>
+                </TabsList>
 
-              <FormField label="Bio">
-                <Textarea
-                  value={designer.bio}
-                  onChange={(e) =>
-                    setDesigner((p) => ({ ...p, bio: e.target.value }))
-                  }
-                  rows={3}
-                  placeholder="Description courte..."
-                />
-              </FormField>
+                <TabsContent value="fr">
+                  <div className="space-y-4">
+                    <FormField label="Rôle">
+                      <Input
+                        value={designer.role}
+                        onChange={(e) =>
+                          setDesigner((p) => ({ ...p, role: e.target.value }))
+                        }
+                        placeholder="Designer & Développeur du site"
+                      />
+                    </FormField>
+
+                    <FormField label="Bio">
+                      <Textarea
+                        value={designer.bio}
+                        onChange={(e) =>
+                          setDesigner((p) => ({ ...p, bio: e.target.value }))
+                        }
+                        rows={3}
+                        placeholder="Description courte..."
+                      />
+                    </FormField>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="ar">
+                  <div className="space-y-4">
+                    <FormField label="الدور">
+                      <Input
+                        dir="rtl"
+                        value={designer.roleAr}
+                        onChange={(e) =>
+                          setDesigner((p) => ({ ...p, roleAr: e.target.value }))
+                        }
+                        placeholder="مصمّم ومطوّر الموقع"
+                      />
+                    </FormField>
+
+                    <FormField label="نبذة">
+                      <Textarea
+                        dir="rtl"
+                        value={designer.bioAr}
+                        onChange={(e) =>
+                          setDesigner((p) => ({ ...p, bioAr: e.target.value }))
+                        }
+                        rows={3}
+                        placeholder="وصف قصير..."
+                      />
+                    </FormField>
+                  </div>
+                </TabsContent>
+              </Tabs>
 
               <div>
                 <p className="mb-2 text-sm font-semibold">Photo / Avatar</p>
@@ -1475,26 +1645,76 @@ setHeroTitle(heroData?.title ?? "");
                  />
                </FormField>
 
-               <FormField label="Sous-titre">
-                 <Input
-                   value={societe.subtitle}
-                   onChange={(e) =>
-                     setSociete((p) => ({ ...p, subtitle: e.target.value }))
-                   }
-                   placeholder="ex : Société porteuse du projet"
-                 />
-               </FormField>
+<Tabs defaultValue="fr">
+                  <TabsList>
+                    <TabsTrigger value="fr">Français</TabsTrigger>
+                    <TabsTrigger value="ar">العربية</TabsTrigger>
+                  </TabsList>
 
-               <FormField label="Description">
-                 <Textarea
-                   value={societe.description}
-                   onChange={(e) =>
-                     setSociete((p) => ({ ...p, description: e.target.value }))
-                   }
-                   rows={3}
-                   placeholder="Brève description de la société..."
-                 />
-               </FormField>
+                  <TabsContent value="fr">
+                    <div className="space-y-4">
+                      <FormField label="Sous-titre">
+                        <Input
+                          value={societe.subtitle}
+                          onChange={(e) =>
+                            setSociete((p) => ({
+                              ...p,
+                              subtitle: e.target.value,
+                            }))
+                          }
+                          placeholder="ex : Société porteuse du projet"
+                        />
+                      </FormField>
+
+                      <FormField label="Description">
+                        <Textarea
+                          value={societe.description}
+                          onChange={(e) =>
+                            setSociete((p) => ({
+                              ...p,
+                              description: e.target.value,
+                            }))
+                          }
+                          rows={3}
+                          placeholder="Brève description de la société..."
+                        />
+                      </FormField>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="ar">
+                    <div className="space-y-4">
+                      <FormField label="العنوان الفرعي">
+                        <Input
+                          dir="rtl"
+                          value={societe.subtitleAr}
+                          onChange={(e) =>
+                            setSociete((p) => ({
+                              ...p,
+                              subtitleAr: e.target.value,
+                            }))
+                          }
+                          placeholder="مثال: الشركة المالكة للمشروع"
+                        />
+                      </FormField>
+
+                      <FormField label="الوصف">
+                        <Textarea
+                          dir="rtl"
+                          value={societe.descriptionAr}
+                          onChange={(e) =>
+                            setSociete((p) => ({
+                              ...p,
+                              descriptionAr: e.target.value,
+                            }))
+                          }
+                          rows={3}
+                          placeholder="وصف قصير للشركة..."
+                        />
+                      </FormField>
+                    </div>
+                  </TabsContent>
+                </Tabs>
 
                <div className="grid gap-4 sm:grid-cols-2">
                  <FormField label="WhatsApp (lien complet)">
@@ -1684,6 +1904,9 @@ function PlanCardEditor({
     badge: string;
     featuresText: string;
     whatsapp_message: string;
+    badgeAr: string;
+    featuresTextAr: string;
+    whatsapp_message_ar: string;
     is_featured: boolean;
   };
   setState: React.Dispatch<React.SetStateAction<typeof state>>;
@@ -1723,35 +1946,90 @@ function PlanCardEditor({
             }
           />
         </FormField>
-        <FormField label={t("adminSite.badge")}>
-          <Input
-            placeholder={t("adminSite.badgePlaceholder")}
-            value={state.badge}
-            onChange={(e) =>
-              setState((prev) => ({ ...prev, badge: e.target.value }))
-            }
-          />
-        </FormField>
-        <FormField label={t("adminSite.featuresList")}>
-          <Textarea
-            value={state.featuresText}
-            onChange={(e) =>
-              setState((prev) => ({ ...prev, featuresText: e.target.value }))
-            }
-            rows={4}
-          />
-        </FormField>
-        <FormField label={t("adminSite.whatsappMessage")}>
-          <Input
-            value={state.whatsapp_message}
-            onChange={(e) =>
-              setState((prev) => ({
-                ...prev,
-                whatsapp_message: e.target.value,
-              }))
-            }
-          />
-        </FormField>
+
+        <Tabs defaultValue="fr">
+          <TabsList>
+            <TabsTrigger value="fr">Français</TabsTrigger>
+            <TabsTrigger value="ar">العربية</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="fr">
+            <div className="space-y-3">
+              <FormField label={t("adminSite.badge")}>
+                <Input
+                  placeholder={t("adminSite.badgePlaceholder")}
+                  value={state.badge}
+                  onChange={(e) =>
+                    setState((prev) => ({ ...prev, badge: e.target.value }))
+                  }
+                />
+              </FormField>
+              <FormField label={t("adminSite.featuresList")}>
+                <Textarea
+                  value={state.featuresText}
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      featuresText: e.target.value,
+                    }))
+                  }
+                  rows={4}
+                />
+              </FormField>
+              <FormField label={t("adminSite.whatsappMessage")}>
+                <Input
+                  value={state.whatsapp_message}
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      whatsapp_message: e.target.value,
+                    }))
+                  }
+                />
+              </FormField>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="ar">
+            <div className="space-y-3">
+              <FormField label="الشارة">
+                <Input
+                  dir="rtl"
+                  placeholder={t("adminSite.badgePlaceholder")}
+                  value={state.badgeAr}
+                  onChange={(e) =>
+                    setState((prev) => ({ ...prev, badgeAr: e.target.value }))
+                  }
+                />
+              </FormField>
+              <FormField label="قائمة المزايا">
+                <Textarea
+                  dir="rtl"
+                  value={state.featuresTextAr}
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      featuresTextAr: e.target.value,
+                    }))
+                  }
+                  rows={4}
+                />
+              </FormField>
+              <FormField label="رسالة واتساب">
+                <Input
+                  dir="rtl"
+                  value={state.whatsapp_message_ar}
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      whatsapp_message_ar: e.target.value,
+                    }))
+                  }
+                />
+              </FormField>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

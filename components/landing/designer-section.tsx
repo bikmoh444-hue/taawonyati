@@ -19,7 +19,7 @@ export function DesignerSection() {
   const { designerCard, ownerCompanyCard } = useLanding();
 
   const name = designerCard?.name || "—";
-  const role = designerCard?.role || "Designer";
+  const role = designerCard?.role || t("landing.designerRoleFallback");
   const bio = designerCard?.bio || t("landing.designerBio");
   const avatar = designerCard?.avatar_url || null;
   const whatsapp = designerCard?.whatsapp_link || null;
@@ -100,7 +100,7 @@ return (
                         className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0D9488] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#0F766E]"
                       >
                         <MessageCircle className="h-4 w-4" />
-                        WhatsApp
+                        {t("landing.designerWhatsApp")}
                       </a>
                     )}
                     {societe.email && (
@@ -111,7 +111,7 @@ return (
                         className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-bold text-slate-100 transition-colors hover:border-[#0D9488]/60 hover:bg-white/10"
                       >
                         <Mail className="h-4 w-4" />
-                        Email
+                        {t("landing.designerEmail")}
                       </a>
                     )}
                     {societe.website_url && (
@@ -180,7 +180,7 @@ return (
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0D9488] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#0F766E]"
                   >
                     <MessageCircle className="h-4 w-4" />
-                    WhatsApp
+                    {t("landing.designerWhatsApp")}
                   </a>
                 )}
                 {email && (
@@ -191,7 +191,7 @@ return (
                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-bold text-slate-100 transition-colors hover:border-[#0D9488]/60 hover:bg-white/10"
                   >
                     <Mail className="h-4 w-4" />
-                    Email
+                    {t("landing.designerEmail")}
                   </a>
                 )}
                 {portfolio && (

@@ -113,7 +113,7 @@ export function LandingFooter() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
           <p className="text-center text-xs text-slate-500">
-            © {new Date().getFullYear()} Sinshin. Tous droits réservés.
+            © {new Date().getFullYear()} Sinshin. {t("landing.footerCopyright")}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs">
             <Link href="#" className="text-slate-400 transition-colors hover:text-[#A8E6DC]">

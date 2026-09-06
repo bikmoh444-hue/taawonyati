@@ -176,6 +176,9 @@ export interface LandingHeroText {
   title: string;
   highlighted_word: string;
   subtitle: string;
+  title_ar?: string | null;
+  highlighted_word_ar?: string | null;
+  subtitle_ar?: string | null;
   updated_at: string;
 }
 
@@ -184,6 +187,8 @@ export interface LandingFeature {
   icon: string;
   title: string;
   description: string;
+  title_ar?: string | null;
+  description_ar?: string | null;
   sort_order: number;
 }
 
@@ -197,6 +202,9 @@ export interface PricingPlan {
   badge: string | null;
   features: string[];
   whatsapp_message: string | null;
+  badge_ar?: string | null;
+  features_ar?: string[] | null;
+  whatsapp_message_ar?: string | null;
   is_featured: boolean;
   updated_at: string;
 }
@@ -249,6 +257,8 @@ export interface DesignerCard {
   name: string;
   role: string;
   bio: string;
+  role_ar?: string | null;
+  bio_ar?: string | null;
   avatar_url: string | null;
   whatsapp_link: string | null;
   email: string | null;
@@ -266,6 +276,8 @@ export interface OwnerCompanyCard {
   name: string;
   subtitle: string;
   description: string;
+  subtitle_ar?: string | null;
+  description_ar?: string | null;
   whatsapp: string | null;
   email: string | null;
   website_url: string | null;
