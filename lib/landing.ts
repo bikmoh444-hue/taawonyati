@@ -1,4 +1,4 @@
-// Server-side data access for the public landing site ("Taawonyati").
+// Server-side data access for the public landing site ("Sinshin").
 // All content lives in Supabase (see sql/20_landing_site.sql) and is readable
 // by anonymous visitors (RLS: SELECT true).
 // NOTE: `cache()` was removed — only the layout calls this function, and the
@@ -14,6 +14,7 @@ import type {
   LandingMedia,
   LandingScreenshot,
   MockupSlotKey,
+  OwnerCompanyCard,
   PricingPlan,
   SocialLink,
   SiteSetting,
@@ -43,6 +44,7 @@ export interface LandingContent {
   social: Record<string, string>;
   settings: LandingSettings;
   designerCard: DesignerCard | null;
+  ownerCompanyCard: OwnerCompanyCard | null;
 }
 
 function mediaByKey(rows: LandingMedia[]): Record<string, string | null> {
@@ -61,7 +63,7 @@ export async function getLandingContent(): Promise<LandingContent> {
   void cookies();
   const supabase = createClient();
 
-  const [mediaRes, heroRes, featuresRes, plansRes, socialRes, settingsRes, screenshotsRes, designerRes] =
+  const [mediaRes, heroRes, featuresRes, plansRes, socialRes, settingsRes, screenshotsRes, designerRes, ownerRes] =
     await Promise.all([
       supabase
         .from("landing_media")
@@ -99,7 +101,22 @@ export async function getLandingContent(): Promise<LandingContent> {
         .select("*")
         .limit(1)
         .maybeSingle<DesignerCard>(),
+      supabase
+        .from("presentation_owner_company")
+        .select("*")
+        .limit(1)
+        .maybeSingle<OwnerCompanyCard>(),
     ]);
+
+  if (mediaRes.error) console.error("[getLandingContent] media error:", mediaRes.error);
+  if (heroRes.error) console.error("[getLandingContent] hero error:", heroRes.error);
+  if (featuresRes.error) console.error("[getLandingContent] features error:", featuresRes.error);
+  if (plansRes.error) console.error("[getLandingContent] plans error:", plansRes.error);
+  if (socialRes.error) console.error("[getLandingContent] social error:", socialRes.error);
+  if (settingsRes.error) console.error("[getLandingContent] settings error:", settingsRes.error);
+  if (screenshotsRes.error) console.error("[getLandingContent] screenshots error:", screenshotsRes.error);
+  if (designerRes.error) console.error("[getLandingContent] designer error:", designerRes.error);
+  if (ownerRes.error) console.error("[getLandingContent] owner error:", ownerRes.error);
 
   const media = mediaByKey(mediaRes.data ?? []);
   const settingsMap = settingsByKey(settingsRes.data ?? []);
@@ -137,5 +154,6 @@ export async function getLandingContent(): Promise<LandingContent> {
       logoUrl: settingsMap["logo_url"],
     },
     designerCard: designerRes.data ?? null,
+    ownerCompanyCard: ownerRes.data ?? null,
   };
 }

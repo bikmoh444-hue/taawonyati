@@ -7,7 +7,7 @@ import { LandingHero } from "@/components/landing/landing-hero";
 import { PricingSection } from "@/components/landing/pricing-section";
 
 export const metadata: Metadata = {
-  title: "Taawonyati - Gestion des cooperatives",
+  title: "Taawoniati - Gestion des cooperatives",
   description:
     "Application web et mobile pour simplifier la gestion des cooperatives.",
 };

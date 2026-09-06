@@ -8,9 +8,9 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Taawonyati - Gestion des cooperatives",
+    title: "Taawoniati - Gestion des cooperatives",
     description:
-      "Presentation publique de Taawonyati, plateforme web et mobile pour la gestion des cooperatives.",
+      "Presentation publique de Taawoniati, plateforme web et mobile pour la gestion des cooperatives.",
   };
 }
 

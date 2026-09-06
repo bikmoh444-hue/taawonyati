@@ -35,25 +35,25 @@ serve(async (req) => {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'Taawonyati <onboarding@resend.dev>',
+        from: 'Taawoniati <onboarding@resend.dev>',
         to: [email],
         subject: `Invitation à rejoindre ${cooperative_name}`,
         html: `
           <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-            <h2 style="color: #1E3A8A;">Bienvenue sur Taawonyati !</h2>
+            <h2 style="color: #1E3A8A;">Bienvenue sur Taawoniati !</h2>
             <p>Bonjour,</p>
-            <p>Vous avez été invité à gérer la coopérative <strong>${cooperative_name}</strong> sur Taawonyati.</p>
-            <p>Taawonyati est votre solution de gestion commerciale simplifiée, conçue pour vous aider à gérer vos stocks, vos clients et vos documents commerciaux.</p>
+            <p>Vous avez été invité à gérer la coopérative <strong>${cooperative_name}</strong> sur Taawoniati.</p>
+            <p>Taawoniati est votre solution de gestion commerciale simplifiée, conçue pour vous aider à gérer vos stocks, vos clients et vos documents commerciaux.</p>
             <div style="margin: 30px 0; text-align: center;">
-              <a href="https://taawonyati.app/accept-invitation?token=${token}" 
+              <a href="https://taawoniati.app/accept-invitation?token=${token}" 
                  style="background-color: #1E3A8A; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: bold; display: inline-block;">
                 Accepter l'invitation
               </a>
             </div>
             <p>Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur :</p>
-            <p style="word-break: break-all; color: #6b7280;">https://taawonyati.app/accept-invitation?token=${token}</p>
+            <p style="word-break: break-all; color: #6b7280;">https://taawoniati.app/accept-invitation?token=${token}</p>
             <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;">
-            <p style="font-size: 12px; color: #9ca3af;">Cet email a été envoyé automatiquement par Taawonyati. Si vous n'attendiez pas cette invitation, vous pouvez ignorer cet email.</p>
+            <p style="font-size: 12px; color: #9ca3af;">Cet email a été envoyé automatiquement par Taawoniati. Si vous n'attendiez pas cette invitation, vous pouvez ignorer cet email.</p>
           </div>
         `,
       }),

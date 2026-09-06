@@ -6,6 +6,7 @@ import {
   LandingMedia,
   LandingHeroText,
   LandingFeature,
+  OwnerCompanyCard,
   PricingPlan,
   SocialLink,
   SiteSetting,
@@ -16,7 +17,7 @@ import { LandingSiteManager } from "@/components/admin/presentation/landing-site
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
-  title: "Presentation - Admin Taawonyati",
+  title: "Presentation - Admin Taawoniati",
 };
 
 export default async function AdminPresentationPage() {
@@ -33,6 +34,7 @@ export default async function AdminPresentationPage() {
     messagesRes,
     screenshotsRes,
     designerRes,
+    ownerRes,
   ] = await Promise.all([
     supabase.from("landing_media").select("*").returns<LandingMedia[]>(),
     supabase
@@ -63,6 +65,11 @@ export default async function AdminPresentationPage() {
       .select("*")
       .limit(1)
       .maybeSingle<DesignerCard>(),
+    supabase
+      .from("presentation_owner_company")
+      .select("*")
+      .limit(1)
+      .maybeSingle<OwnerCompanyCard>(),
   ]);
 
   const monthlyPlan =
@@ -81,6 +88,7 @@ export default async function AdminPresentationPage() {
       messages={messagesRes.data ?? []}
       screenshots={screenshotsRes.data ?? []}
       designerCard={designerRes.data}
+      ownerCompanyCard={ownerRes.data}
     />
   );
 }

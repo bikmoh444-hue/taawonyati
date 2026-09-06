@@ -59,6 +59,6 @@ export const MONEY_UNIT = "DH";
 export const PERIODS = ["day", "week", "month", "year"] as const;
 export type PeriodKey = (typeof PERIODS)[number];
 
-export const LOCALE_COOKIE = "taawonyati.locale";
+export const LOCALE_COOKIE = "taawoniati.locale";
 export const DEFAULT_LOCALE = "ar";
 export type AppLocale = "ar" | "fr";

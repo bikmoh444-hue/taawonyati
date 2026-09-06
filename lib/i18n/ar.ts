@@ -1,7 +1,7 @@
 // Arabic default-language dictionary — the key type for the whole app.
 export const ar = {
   common: {
-    appName: "Taawonyati",
+    appName: "taawoniati",
     save: "حفظ",
     cancel: "إلغاء",
     delete: "حذف",
@@ -69,7 +69,7 @@ export const ar = {
     factory: "المصدر",
   },
   auth: {
-    loginTitle: "تسجيل الدخول إلى Taawonyati",
+    loginTitle: "تسجيل الدخول إلى Taawoniati",
     loginSubtitle: "أدخل بريدك الإلكتروني وكلمة المرور",
     email: "البريد الإلكتروني",
     password: "كلمة المرور",
@@ -372,7 +372,7 @@ export const ar = {
     dashboard: "لوحة التحكم",
     accounts: "التعاونيات والحسابات",
     greeting: "مرحبا أيها الأدمن",
-    subtitle: "إدارة تعاونيات منصة Taawonyati",
+    subtitle: "إدارة تعاونيات منصة Taawoniati",
     totalCoops: "إجمالي التعاونيات",
     manage: "إدارة",
     recentCoops: "آخر التعاونيات",
@@ -409,12 +409,12 @@ export const ar = {
     viaEmail: "أو راسلنا مباشرة على:",
   },
   about: {
-    title: "حول Taawonyati",
-    text: "Taawonyati هو نظام تدبير التعاونيات الفلاحية بالمغرب. يسمح بتدبير العملاء والموردين والمنتجات والوثائق التجارية (فاتورة، عرض سعر، رائع) والمالية والأنشطة.",
+    title: "حول Taawoniati",
+    text: "Taawoniati هو نظام تدبير التعاونيات الفلاحية بالمغرب. يسمح بتدبير العملاء والموردين والمنتجات والوثائق التجارية (فاتورة، عرض سعر، رائع) والمالية والأنشطة.",
     version: "الإصدار",
   },
   landing: {
-    brand: "تعاونيتي",
+    brand: "taawoniati",
     navHome: "الرئيسية",
     navFeatures: "المميزات",
     navPricing: "الأسعار",
@@ -616,7 +616,7 @@ export const ar = {
   },
   adminSite: {
     title: "الموقع التعريفي",
-    subtitle: "تحكم في كل محتوى الموقع العام لـ Taawonyati",
+    subtitle: "تحكم في كل محتوى الموقع العام لـ Taawoniati",
     heroTab: "الرئيسية (Hero)",
     heroTitle: "عنوان الواجهة",
     heroTitleHelp: "النص قبل الكلمة المميزة",

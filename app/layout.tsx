@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { I18nProvider } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/server";
 import { createClient } from "@/lib/supabase/server";
+import { LOCALE_COOKIE } from "@/lib/constants";
 
 export async function generateMetadata(): Promise<Metadata> {
   let logoUrl: string | null = null;
@@ -20,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   const base: Metadata = {
-    title: "Taawonyati — Coopératives",
+    title: "taawoniati— Coopératives",
     description: "Système de gestion des coopératives agricoles",
   };
 
@@ -46,7 +47,11 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-const LOCALE_PRE_SCRIPT = `(function(){try{var l=localStorage.getItem('taawonyati.locale');var d=document.documentElement;if(l==='ar'||l==='fr'){d.lang=l;d.setAttribute('dir',l==='ar'?'rtl':'ltr');}}catch(e){}})();`;
+function getLocalePreScript() {
+  return `(function(){try{var l=localStorage.getItem('${LOCALE_COOKIE}');var d=document.documentElement;if(l==='ar'||l==='fr'){d.lang=l;d.setAttribute('dir',l==='ar'?'rtl':'ltr');}}catch(e){}})();`;
+}
+
+const LOCALE_PRE_SCRIPT = getLocalePreScript();
 
 export default function RootLayout({
   children,

@@ -67,7 +67,7 @@ export function CoopShell({
   const drawerSide = dir === "rtl" ? "right" : "left";
 
   const coopName =
-    cooperative?.name_fr || cooperative?.name_ar || profile.full_name || "Taawonyati";
+    cooperative?.name_fr || cooperative?.name_ar || profile.full_name || "taawoniati";
 
   function title() {
     return t(pageTitleKey(pathname));

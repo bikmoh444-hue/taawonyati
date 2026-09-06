@@ -7,7 +7,7 @@ insert into public.site_settings (key, value)
 values
   ('web_app_link', '/login'),
   ('app_download_url', ''),
-  ('gmail_address', 'contact@taawonyati.com'),
+  ('gmail_address', 'contact@taawoniati.com'),
   ('logo_url', '')
 on conflict (key) do update
 set value = case
@@ -34,12 +34,12 @@ select
 where not exists (select 1 from public.landing_hero_text);
 
 update public.social_links
-set url = 'mailto:contact@taawonyati.com'
+set url = 'mailto:contact@taawoniati.com'
 where platform = 'email' and (url is null or url = '');
 
 insert into public.social_links (platform, url)
 values
-  ('facebook', 'https://facebook.com/taawonyati'),
-  ('twitter', 'https://twitter.com/taawonyati'),
-  ('email', 'mailto:contact@taawonyati.com')
+  ('facebook', 'https://facebook.com/taawoniati'),
+  ('twitter', 'https://twitter.com/taawoniati'),
+  ('email', 'mailto:contact@taawoniati.com')
 on conflict (platform) do nothing;

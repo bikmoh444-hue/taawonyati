@@ -4,7 +4,7 @@ import { FeaturesSection } from "@/components/landing/features-section";
 import { PricingSection } from "@/components/landing/pricing-section";
 
 export const metadata: Metadata = {
-  title: "Fonctionnalités & Tarifs — Taawonyati",
+  title: "Fonctionnalités & Tarifs — Taawoniati",
   description:
     "Tout ce dont votre coopérative a besoin : documents, finances, clients, activités. Choisissez votre formule.",
 };

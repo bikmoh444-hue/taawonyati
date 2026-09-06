@@ -126,7 +126,7 @@ export function ActivityPdf({
         ) : null}
 
         <Text style={styles.footer}>
-          {coopName} · {label(locale, "نشاط", "Activité")} · Taawonyati
+          {coopName} · {label(locale, "نشاط", "Activité")} · Taawoniati
         </Text>
       </Page>
     </Document>

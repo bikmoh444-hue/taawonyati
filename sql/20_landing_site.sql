@@ -1,6 +1,6 @@
 -- ==========================================================
 -- 20_LANDING_SITE.SQL
--- Site vitrine "Taawonyati" : contenu dynamique piloté depuis l'admin.
+-- Site vitrine "Taawoniati" : contenu dynamique piloté depuis l'admin.
 -- Tables publiques en lecture, écriture réservée aux admins.
 -- contact_messages : insertion publique (formulaire), lecture/écriture admin.
 -- ==========================================================
@@ -144,18 +144,18 @@ insert into landing_features (icon, title, description, sort_order) values
 insert into pricing_plans (plan_type, price, currency, badge, features, whatsapp_message, is_featured) values
 ('monthly', 0, 'DH', 'Flexible',
  array['Accès complet à toutes les fonctionnalités','Support par email','Mises à jour incluses'],
- 'Bonjour, je suis intéressé par l''abonnement mensuel Taawonyati.', false),
+ 'Bonjour, je suis intéressé par l''abonnement mensuel Taawoniati.', false),
 ('annual', 0, 'DH', 'Recommandé / 2 mois offerts',
  array['Tout de l''abonnement mensuel','Support prioritaire WhatsApp','Formation d''onboarding incluse'],
- 'Bonjour, je suis intéressé par l''abonnement annuel Taawonyati.', true);
+ 'Bonjour, je suis intéressé par l''abonnement annuel Taawoniati.', true);
 
 insert into social_links (platform, url) values
 ('whatsapp', 'https://wa.me/2126XXXXXXX'),
-('facebook', 'https://facebook.com/taawonyati'),
-('twitter', 'https://twitter.com/taawonyati'),
-('email', 'mailto:contact@taawonyati.com');
+('facebook', 'https://facebook.com/taawoniati'),
+('twitter', 'https://twitter.com/taawoniati'),
+('email', 'mailto:contact@taawoniati.com');
 
 insert into site_settings (key, value) values
 ('whatsapp_number', '2126XXXXXXX'),
-('app_link', 'https://taawonyati.com/app'),
+('app_link', 'https://taawoniati.com/app'),
 ('web_app_link', '/admin/login');

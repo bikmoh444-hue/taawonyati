@@ -51,10 +51,10 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         <div className="flex h-16 items-center justify-between px-4 lg:px-6">
           <div className="flex items-center gap-2">
             <div className="rounded-xl px-1.5 py-1">
-              <SiteLogo src={logoUrl} alt="Taawonyati" showWordmark={false} />
+              <SiteLogo src={logoUrl} alt="taawoniati" showWordmark={false} />
             </div>
             <div className="leading-tight">
-              <p className="font-extrabold text-navy">Taawonyati</p>
+              <p className="font-extrabold text-navy">taawoniati</p>
               <p className="text-[11px] text-muted-foreground">Admin</p>
             </div>
           </div>

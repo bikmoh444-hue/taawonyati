@@ -158,7 +158,7 @@ export interface DocumentWithItems extends DocumentRow {
 }
 
 // ---------------------------------------------------------------------------
-// Site vitrine "Taawonyati" — contenu dynamique piloté depuis l'admin.
+// Site vitrine "Sinshin" — contenu dynamique piloté depuis l'admin.
 // (tables créées dans sql/20_landing_site.sql)
 // ---------------------------------------------------------------------------
 
@@ -257,5 +257,19 @@ export interface DesignerCard {
   social_facebook: string | null;
   social_twitter: string | null;
   social_dribbble: string | null;
+  updated_at: string;
+}
+
+export interface OwnerCompanyCard {
+  id: string;
+  logo_url: string | null;
+  name: string;
+  subtitle: string;
+  description: string;
+  whatsapp: string | null;
+  email: string | null;
+  website_url: string | null;
+  is_active: boolean;
+  created_at: string;
   updated_at: string;
 }

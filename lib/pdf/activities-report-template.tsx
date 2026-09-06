@@ -98,7 +98,7 @@ export function ActivitiesReportPdf({
               {label(locale, `تقرير أنشطة ${coopName}`, `Rapport d'activités ${year}`)}
             </Text>
             <Text style={styles.subtitle}>
-              {label(locale, "تقرير سنوي", `Année ${year}`)} · Taawonyati
+              {label(locale, "تقرير سنوي", `Année ${year}`)} · Taawoniati
             </Text>
           </View>
           {cooperative.logo_url ? (
@@ -163,7 +163,7 @@ export function ActivitiesReportPdf({
 
         <Text style={styles.footer}>
           {coopName} ·{" "}
-          {label(locale, "تقرير الأنشطة السنوي", "Rapport annuel d'activités")} · Taawonyati
+          {label(locale, "تقرير الأنشطة السنوي", "Rapport annuel d'activités")} · Taawoniati
         </Text>
       </Page>
     </Document>

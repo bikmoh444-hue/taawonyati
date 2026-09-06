@@ -85,8 +85,8 @@ function HeroVisual({
     <div className="relative mx-auto w-full max-w-[400px] sm:max-w-[560px] md:max-w-[640px]">
       <DesktopMockup
         src={src}
-        alt="Dashboard Taawonyati"
-        urlText="https://taawonyati.com/dashboard"
+        alt="Dashboard Sinshin"
+        urlText="https://sinshin.com/dashboard"
         fallback={
           <div className="grid h-full w-full place-items-center bg-[#F4F7F6]">
             <div className="flex flex-col items-center gap-3 px-6 text-center">

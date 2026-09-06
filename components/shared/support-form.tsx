@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-const SUPPORT_EMAIL = "support@taawonyati.ma";
+const SUPPORT_EMAIL = "support@sinshin.ma";
 
 export function SupportForm() {
   const { t } = useI18n();
@@ -29,7 +29,7 @@ export function SupportForm() {
     setSending(true);
     try {
       const mailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
-        `[Taawonyati] Message de ${name.trim()}`
+        `[taawoniati] Message de ${name.trim()}`
       )}&body=${encodeURIComponent(
         `Nom: ${name.trim()}\nEmail: ${email.trim()}\n\n${message}`
       )}`;

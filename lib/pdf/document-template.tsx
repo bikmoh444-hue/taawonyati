@@ -373,7 +373,7 @@ export function DocumentPdf({
         </View>
 
         <Text style={styles.footerNote}>
-          {coopName} · {record.number} · Document généré par Taawonyati
+          {coopName} · {record.number} · Document généré par Taawoniati
         </Text>
       </Page>
     </Document>

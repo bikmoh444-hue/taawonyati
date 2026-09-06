@@ -121,7 +121,7 @@ export function LoginForm({
             <Input
               type="email"
               autoComplete="email"
-              placeholder={isAdmin ? "admin@taawonyati.com" : t("auth.emailPlaceholder")}
+              placeholder={isAdmin ? "admin@sinshin.ma" : t("auth.emailPlaceholder")}
               className={isAdmin ? "rounded-lg bg-white pe-12 ps-11" : "pe-12"}
               {...register("email")}
             />

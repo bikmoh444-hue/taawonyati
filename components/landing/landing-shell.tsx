@@ -2,7 +2,7 @@
 
 import { createContext, useContext, type ReactNode } from "react";
 import type { LandingContent, LandingHeroData, LandingSettings } from "@/lib/landing";
-import type { DesignerCard, LandingScreenshot, MockupSlotKey, PricingPlan } from "@/lib/types";
+import type { DesignerCard, LandingScreenshot, MockupSlotKey, OwnerCompanyCard, PricingPlan } from "@/lib/types";
 import { LandingHeader } from "./landing-header";
 import { LandingFooter } from "./landing-footer";
 
@@ -11,6 +11,7 @@ interface LandingContextValue {
   hero: LandingHeroData | null;
   mockups: Record<MockupSlotKey, string | null>;
   designerCard: DesignerCard | null;
+  ownerCompanyCard: OwnerCompanyCard | null;
   settings: LandingSettings;
   social: Record<string, string>;
   monthlyPlan: PricingPlan | null;
@@ -41,6 +42,7 @@ export function LandingShell({
         hero: content.hero,
         mockups: content.mockups,
         designerCard: content.designerCard,
+        ownerCompanyCard: content.ownerCompanyCard,
         settings: content.settings,
         social: content.social,
         monthlyPlan: content.monthlyPlan,

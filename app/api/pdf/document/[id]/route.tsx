@@ -114,7 +114,7 @@ export async function GET(
   return new Response(new Uint8Array(buffer), {
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="taawonyati-${record.number}.pdf"`,
+      "Content-Disposition": `attachment; filename="taawoniati-${record.number}.pdf"`,
       "Cache-Control": "no-store",
     },
   });

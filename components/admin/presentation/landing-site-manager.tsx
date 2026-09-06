@@ -7,8 +7,11 @@ import { useRouter } from "next/navigation";
 import {
   ArrowDown,
   ArrowUp,
+  ArrowUpRight,
   ExternalLink,
   Loader2,
+  Mail,
+  MessageCircle,
   Plus,
   RefreshCcw,
   Trash2,
@@ -37,12 +40,14 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import type {
   ContactMessage,
   LandingFeature,
   LandingHeroText,
   LandingMedia,
   LandingScreenshot,
+  OwnerCompanyCard,
   PricingPlan,
   SiteSetting,
   SocialLink,
@@ -87,6 +92,7 @@ export function LandingSiteManager({
   messages,
   screenshots: initialScreenshots,
   designerCard: initialDesignerCard,
+  ownerCompanyCard: initialOwnerCompanyCard,
 }: {
   media: LandingMedia[];
   hero: LandingHeroText | null;
@@ -98,6 +104,7 @@ export function LandingSiteManager({
   messages: ContactMessage[];
   screenshots: LandingScreenshot[];
   designerCard: DesignerCard | null;
+  ownerCompanyCard: OwnerCompanyCard | null;
 }) {
   const { t } = useI18n();
   const router = useRouter();
@@ -182,6 +189,19 @@ export function LandingSiteManager({
     social_facebook: initialDesignerCard?.social_facebook ?? "",
     social_twitter: initialDesignerCard?.social_twitter ?? "",
     social_dribbble: initialDesignerCard?.social_dribbble ?? "",
+  });
+
+  /* ---- Owner company card state ---- */
+  const [societe, setSociete] = useState({
+    id: initialOwnerCompanyCard?.id ?? null,
+    logo_url: initialOwnerCompanyCard?.logo_url ?? null,
+    name: initialOwnerCompanyCard?.name ?? "",
+    subtitle: initialOwnerCompanyCard?.subtitle ?? "",
+    description: initialOwnerCompanyCard?.description ?? "",
+    whatsapp: initialOwnerCompanyCard?.whatsapp ?? "",
+    email: initialOwnerCompanyCard?.email ?? "",
+    website_url: initialOwnerCompanyCard?.website_url ?? "",
+    is_active: initialOwnerCompanyCard?.is_active ?? true,
   });
 
   // Re-read every presentation table from Supabase and re-sync the local state.
@@ -288,6 +308,25 @@ setHeroTitle(heroData?.title ?? "");
         social_facebook: dc.social_facebook ?? "",
         social_twitter: dc.social_twitter ?? "",
         social_dribbble: dc.social_dribbble ?? "",
+      });
+    }
+
+    const { data: oc } = await supabase
+      .from("presentation_owner_company")
+      .select("*")
+      .limit(1)
+      .maybeSingle<OwnerCompanyCard>();
+    if (oc) {
+      setSociete({
+        id: oc.id,
+        logo_url: oc.logo_url ?? null,
+        name: oc.name ?? "",
+        subtitle: oc.subtitle ?? "",
+        description: oc.description ?? "",
+        whatsapp: oc.whatsapp ?? "",
+        email: oc.email ?? "",
+        website_url: oc.website_url ?? "",
+        is_active: oc.is_active ?? true,
       });
     }
   }
@@ -575,6 +614,42 @@ setHeroTitle(heroData?.title ?? "");
     }
   }
 
+  async function saveOwnerCompanyCard() {
+    setBusy("societe");
+    const supabase = createClient();
+    try {
+      const payload = {
+        id: societe.id,
+        logo_url: societe.logo_url || null,
+        name: societe.name.trim(),
+        subtitle: societe.subtitle.trim(),
+        description: societe.description.trim(),
+        whatsapp: societe.whatsapp.trim() || null,
+        email: societe.email.trim() || null,
+        website_url: societe.website_url.trim() || null,
+        is_active: societe.is_active,
+        updated_at: new Date().toISOString(),
+      };
+
+      const { data, error } = await supabase
+        .from("presentation_owner_company")
+        .upsert(payload, { onConflict: "id" });
+      if (error) {
+        console.error("[saveOwnerCompanyCard] Supabase error:", error);
+        throw error;
+      }
+      await reloadData();
+      router.refresh();
+      await revalidateLanding();
+      toast.success(t("toasts.saved"));
+    } catch (e) {
+      console.error(e);
+      toast.error(t("toasts.error"));
+    } finally {
+      setBusy(null);
+    }
+  }
+
   /* ===== Feature helpers ===== */
 
   function addFeature() {
@@ -682,10 +757,13 @@ setHeroTitle(heroData?.title ?? "");
           <TabsTrigger value="mockups">
             Mockups
           </TabsTrigger>
-          <TabsTrigger value="designer">
-            Designer
-          </TabsTrigger>
-          <TabsTrigger value="messages">
+<TabsTrigger value="designer">
+             Designer
+           </TabsTrigger>
+           <TabsTrigger value="societe">
+             Société
+           </TabsTrigger>
+           <TabsTrigger value="messages">
             {t("adminSite.messagesTab")}
           </TabsTrigger>
         </TabsList>
@@ -1362,12 +1440,173 @@ setHeroTitle(heroData?.title ?? "");
                   )}
                 </div>
               </div>
-            </div>
-          </div>
-        </TabsContent>
+</div>
+         </div>
+         </TabsContent>
 
-        {/* ===== MESSAGES ===== */}
-        <TabsContent value="messages">
+         {/* ===== SOCIÉTÉ ===== */}
+         <TabsContent value="societe">
+           <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+             {/* Form */}
+             <div className="space-y-4 rounded-3xl bg-white p-6 shadow-sm">
+               <p className="text-sm text-muted-foreground">
+                 Informations de la société propriétaire affichées sur la carte en bas de la page d&apos;accueil.
+               </p>
+
+               <div>
+                 <p className="mb-2 text-sm font-semibold">Logo / Image</p>
+                 <ImageUpload
+                   kind="landing"
+                   value={societe.logo_url}
+                   helperText="Logo de la société (optionnel)"
+                   onChange={(url) =>
+                     setSociete((p) => ({ ...p, logo_url: url }))
+                   }
+                 />
+               </div>
+
+               <FormField label="Nom de la société">
+                 <Input
+                   value={societe.name}
+                   onChange={(e) =>
+                     setSociete((p) => ({ ...p, name: e.target.value }))
+                   }
+                   placeholder="SARL"
+                 />
+               </FormField>
+
+               <FormField label="Sous-titre">
+                 <Input
+                   value={societe.subtitle}
+                   onChange={(e) =>
+                     setSociete((p) => ({ ...p, subtitle: e.target.value }))
+                   }
+                   placeholder="ex : Société porteuse du projet"
+                 />
+               </FormField>
+
+               <FormField label="Description">
+                 <Textarea
+                   value={societe.description}
+                   onChange={(e) =>
+                     setSociete((p) => ({ ...p, description: e.target.value }))
+                   }
+                   rows={3}
+                   placeholder="Brève description de la société..."
+                 />
+               </FormField>
+
+               <div className="grid gap-4 sm:grid-cols-2">
+                 <FormField label="WhatsApp (lien complet)">
+                   <Input
+                     value={societe.whatsapp}
+                     onChange={(e) =>
+                       setSociete((p) => ({ ...p, whatsapp: e.target.value }))
+                     }
+                     placeholder="https://wa.me/2126XXXXXXX"
+                   />
+                 </FormField>
+                 <FormField label="Email">
+                   <Input
+                     type="email"
+                     value={societe.email}
+                     onChange={(e) =>
+                       setSociete((p) => ({ ...p, email: e.target.value }))
+                     }
+                     placeholder="contact@societe.com"
+                   />
+                 </FormField>
+               </div>
+
+                <FormField label="Site web / Portfolio">
+                  <Input
+                    value={societe.website_url}
+                    onChange={(e) =>
+                      setSociete((p) => ({ ...p, website_url: e.target.value }))
+                    }
+                    placeholder="https://taawoniati.com"
+                  />
+                </FormField>
+
+                <div className="flex items-center gap-2 pt-2">
+                  <Switch
+                    checked={societe.is_active}
+                    onCheckedChange={(checked) =>
+                      setSociete((p) => ({ ...p, is_active: checked }))
+                    }
+                  />
+                  <span className="text-sm font-semibold">Carte active</span>
+                </div>
+
+                <div className="pt-2">
+                 <Button
+                   onClick={saveOwnerCompanyCard}
+                   disabled={isBusy}
+                   className="bg-[#0F5F55] hover:bg-[#0B4A43]"
+                 >
+                   {busy === "societe" && (
+                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                   )}
+                   Enregistrer la carte Société
+                 </Button>
+               </div>
+             </div>
+
+             {/* Live preview */}
+             <div className="rounded-3xl bg-white p-6 shadow-sm">
+               <p className="mb-4 text-sm font-semibold text-muted-foreground">
+                 Aperçu en direct
+               </p>
+                <div className="overflow-hidden rounded-2xl bg-[#0F172A] p-6 text-center text-white">
+                  <div className="mx-auto grid h-24 w-24 place-items-center overflow-hidden rounded-full border-4 border-[#0D9488]/50 bg-[#1B2541] text-[#A8E6DC]">
+                    {societe.logo_url ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={societe.logo_url}
+                        alt={societe.name}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-10 w-10" aria-hidden>
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="9" cy="9" r="4.5" />
+                        <path d="M15 9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      </svg>
+                    )}
+                  </div>
+                  <h3 className="mt-4 text-lg font-extrabold text-white">
+                    {societe.name || "[NOM_SOCIETE]"}
+                  </h3>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-wide text-[#0D9488]">
+                    {societe.subtitle || "[SOUS_TITRE]"}
+                  </p>
+                  <p className="mx-auto mt-3 max-w-sm text-xs leading-relaxed text-slate-300">
+                    {societe.description || "[DESCRIPTION]"}
+                  </p>
+                  <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+                    {(societe.whatsapp || societe.email || societe.website_url) && (
+                      <span className="inline-flex items-center gap-1 rounded-lg bg-[#0D9488] px-3 py-1.5 text-[11px] font-bold text-white">
+                        <MessageCircle className="h-3 w-3" /> WhatsApp
+                      </span>
+                    )}
+                    {societe.email && (
+                      <span className="inline-flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-bold text-slate-100">
+                        <Mail className="h-3 w-3" /> Email
+                      </span>
+                    )}
+                    {societe.website_url && (
+                      <span className="inline-flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-bold text-slate-100">
+                        <ArrowUpRight className="h-3 w-3" /> Site web
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+         {/* ===== MESSAGES ===== */}
+         <TabsContent value="messages">
           <div className="rounded-3xl bg-white p-6 shadow-sm">
             {messages.length === 0 ? (
               <p className="text-muted-foreground">{t("adminSite.noMessages")}</p>

@@ -59,7 +59,7 @@ export function DesktopMockup({
   alt,
   className,
   fallback,
-  urlText = "https://taawonyati.com",
+   urlText = "https://sinshin.com",
 }: {
   src?: string | null;
   alt?: string;

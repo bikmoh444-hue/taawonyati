@@ -20,7 +20,7 @@ const SOCIAL_ICONS = [
 
 export function LandingFooter() {
   const { t } = useI18n();
-  const { social } = useLanding();
+  const { social, settings } = useLanding();
 
   const navItems = [
     [t("landing.navHome"), "/"],
@@ -36,8 +36,8 @@ export function LandingFooter() {
           {/* Brand */}
           <div>
             <SiteLogo
-              src={null}
-              alt="Taawonyati"
+              src={settings.logoUrl}
+              alt="taawoniati"
               showWordmark
               className="[&_span:last-child]:text-white"
             />
@@ -113,7 +113,7 @@ export function LandingFooter() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
           <p className="text-center text-xs text-slate-500">
-            © {new Date().getFullYear()} Taawonyati. {t("landing.footerCopyright")}
+            © {new Date().getFullYear()} Sinshin. Tous droits réservés.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs">
             <Link href="#" className="text-slate-400 transition-colors hover:text-[#A8E6DC]">

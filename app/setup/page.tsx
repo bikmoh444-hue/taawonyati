@@ -19,7 +19,7 @@ export default async function SetupPage() {
   return (
     <div className="min-h-screen bg-soft py-10">
       <div className="mx-auto max-w-2xl px-4">
-        <h1 className="mb-2 text-2xl font-extrabold text-navy">Taawonyati</h1>
+        <h1 className="mb-2 text-2xl font-extrabold text-navy">Taawoniati</h1>
         <p className="mb-6 text-sm text-muted-foreground">
           {completed ? t("setup.editTitle") : t("setup.title")}
         </p>

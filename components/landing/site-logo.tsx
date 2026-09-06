@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 // fallback mark when no logo is set.
 export function SiteLogo({
   src,
-  alt = "Taawonyati",
+   alt = "taawoniati",
   className,
   iconClassName,
   invert = false,

@@ -9,7 +9,7 @@ export default async function AboutPage() {
 
   return (
     <div className="mx-auto max-w-xl space-y-4">
-      <h1 className="text-2xl font-extrabold text-navy">Taawonyati</h1>
+      <h1 className="text-2xl font-extrabold text-navy">Taawoniati</h1>
       <div className="rounded-3xl bg-white p-6 shadow-sm">
         <p className="text-sm leading-relaxed text-muted-foreground">
           {t("about.text")}

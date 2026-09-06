@@ -1,6 +1,6 @@
 -- ==========================================================
 -- 22_PRESENTATION_CONTENT.SQL
--- Consolidation du contenu vitrine Taawonyati.
+-- Consolidation du contenu vitrine Taawoniati.
 -- Ajoute la table landing_content demandee, durcit landing_screenshots
 -- et contact_messages, et corrige les reglages utilises par les CTA.
 -- ==========================================================
@@ -155,9 +155,9 @@ select
   array['Tout de l''abonnement mensuel', 'Support prioritaire WhatsApp', 'Formation d''onboarding incluse'],
   '2126XXXXXXX',
   '',
-  'https://facebook.com/taawonyati',
-  'https://twitter.com/taawonyati',
-  'contact@taawonyati.com'
+  'https://facebook.com/taawoniati',
+  'https://twitter.com/taawoniati',
+'contact@taawoniati.com'
 where not exists (select 1 from public.landing_content);
 
 insert into storage.buckets (id, name, public, file_size_limit)
@@ -195,7 +195,7 @@ insert into public.site_settings (key, value)
 values
   ('web_app_link', '/login'),
   ('app_download_url', ''),
-  ('gmail_address', 'contact@taawonyati.com'),
+  ('gmail_address', 'contact@taawoniati.com'),
   ('logo_url', '')
 on conflict (key) do update
 set value = case
