@@ -423,7 +423,7 @@ export const ar = {
     signIn: "تسجيل الدخول",
     openApp: "افتح التطبيق",
     openSite: "افتح الموقع",
-    goToApp: "الدخول عبر التطبيق",
+    goToApp: "تحميل التطبيق",
     goToSite: "الدخول عبر الموقع",
     goToDashboard: "افتح لوحة القيادة",
     downloadApp: "تحميل التطبيق",

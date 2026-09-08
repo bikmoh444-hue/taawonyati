@@ -12,7 +12,7 @@ import { useLanding } from "./landing-shell";
 import { DesktopMockup } from "./mockups";
 
 export function LandingHero() {
-  const { mockups, hero } = useLanding();
+  const { mockups, hero, settings } = useLanding();
   const { t } = useI18n();
 
   const heroTitle = hero?.title ?? t("landing.heroTitleFallback");
@@ -49,7 +49,7 @@ export function LandingHero() {
               <ArrowRight className="h-4 w-4 transition-transform rtl:rotate-180 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
             </a>
             <a
-              href="#app"
+              href={settings.appLink || "#"}
               className="inline-flex items-center gap-2 rounded-full bg-[#0F172A] px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-[#0F172A]/20 transition-all hover:bg-[#1e293b]"
             >
               <Smartphone className="h-4 w-4 text-[#A8E6DC]" />
